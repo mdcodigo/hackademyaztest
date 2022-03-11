@@ -1,25 +1,25 @@
 resource "azurerm_frontdoor" "mshack" {
-   name                                         = var.frontdoorname
-   location                                     = var.location
-   resource_group_name                          = var.resource_group_name
-   enforce_backend_pools_certificate_name_check = var.enforcebpcert
+  name = var.frontdoorname
+  //location                                     = var.location
+  resource_group_name                          = var.resource_group_name
+  enforce_backend_pools_certificate_name_check = var.enforcebpcert
 
   frontend_endpoint {
-  name              = lookup(var.frontend_endpoint, "name")
-  host_name         = lookup(var.frontend_endpoint, "host_name")
+    name      = lookup(var.frontend_endpoint, "name")
+    host_name = lookup(var.frontend_endpoint, "host_name")
   }
 
   backend_pool_load_balancing {
-  name = "${var.backendpoolname}LBSetting"
+    name = "${var.backendpoolname}LBSetting"
   }
 
   backend_pool_health_probe {
-  name = "${var.backendpoolname}HealthSetting"
+    name = "${var.backendpoolname}HealthSetting"
   }
 
 
-////////////////////////////////////////////
-dynamic "routing_rule" {
+  ////////////////////////////////////////////
+  dynamic "routing_rule" {
     for_each = var.routing_rule
     content {
       name               = routing_rule.value.name
@@ -29,12 +29,12 @@ dynamic "routing_rule" {
       dynamic "forwarding_configuration" {
         for_each = routing_rule.value.configuration == "Forwarding" ? [routing_rule.value.forwarding_configuration] : []
         content {
-          backend_pool_name                     = routing_rule.value.forwarding_configuration.backend_pool_name
-          cache_enabled                         = routing_rule.value.forwarding_configuration.cache_enabled                           
-          cache_use_dynamic_compression         = routing_rule.value.forwarding_configuration.cache_use_dynamic_compression #default: false
+          backend_pool_name             = routing_rule.value.forwarding_configuration.backend_pool_name
+          cache_enabled                 = routing_rule.value.forwarding_configuration.cache_enabled
+          cache_use_dynamic_compression = routing_rule.value.forwarding_configuration.cache_use_dynamic_compression #default: false
           //cache_query_parameter_strip_directive = routing_rule.value.forwarding_configuration.cache_query_parameter_strip_directive
-          custom_forwarding_path                = routing_rule.value.forwarding_configuration.custom_forwarding_path
-          forwarding_protocol                   = routing_rule.value.forwarding_configuration.forwarding_protocol
+          custom_forwarding_path = routing_rule.value.forwarding_configuration.custom_forwarding_path
+          forwarding_protocol    = routing_rule.value.forwarding_configuration.forwarding_protocol
         }
       }
       dynamic "redirect_configuration" {
@@ -51,8 +51,8 @@ dynamic "routing_rule" {
     }
   }
 
-////////////////////////////////////////////
- dynamic "backend_pool_load_balancing" {
+  ////////////////////////////////////////////
+  dynamic "backend_pool_load_balancing" {
     for_each = var.backend_pool_load_balancing
     content {
       name                            = backend_pool_load_balancing.value.name
@@ -61,8 +61,8 @@ dynamic "routing_rule" {
       additional_latency_milliseconds = backend_pool_load_balancing.value.additional_latency_milliseconds
     }
   }
- ////////////////////////////////////////////
- dynamic "backend_pool_health_probe" {
+  ////////////////////////////////////////////
+  dynamic "backend_pool_health_probe" {
     for_each = var.backend_pool_health_probe
     content {
       name                = backend_pool_health_probe.value.name
@@ -71,8 +71,8 @@ dynamic "routing_rule" {
       interval_in_seconds = backend_pool_health_probe.value.interval_in_seconds
     }
   }
-//////////////////////////////////////////////
-    dynamic "backend_pool" {
+  //////////////////////////////////////////////
+  dynamic "backend_pool" {
     for_each = var.front-door-object-backend-pool.backend_pool
     content {
       name                = backend_pool.value.name
@@ -93,7 +93,7 @@ dynamic "routing_rule" {
       }
     }
   }
-}  
+}
 
 
 //reference: https://github.com/aztfmod/terraform-azurerm-caf-frontdoor

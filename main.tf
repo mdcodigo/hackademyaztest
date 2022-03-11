@@ -108,8 +108,8 @@ module "Appservice" {
 }
 //////// AppServices ////////
 
-/*
-//// #5 FrontDoor
+
+//// #4 FrontDoor
 module "Frontdoor" {
   source              = "./modules/FrontDoor"
   tags                = local.common_tags
@@ -178,8 +178,8 @@ module "Frontdoor" {
         backend = {
           app1 = {
             enabled     = true
-            address     = join(",", module.Appservice.*.RGCU001.app_service_default_site_hostname)
-            host_header = join(",", module.Appservice.*.RGCU001.app_service_default_site_hostname)
+            address     = module.Appservice.app_service_default_site_hostname
+            host_header = module.Appservice.app_service_default_site_hostname
             http_port   = 80
             https_port  = 443
             priority    = 1
@@ -194,4 +194,4 @@ module "Frontdoor" {
   }
 }
 //////////// FrontDoor ////////////
-*/
+
