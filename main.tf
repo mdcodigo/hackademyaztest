@@ -80,6 +80,33 @@ module "SQLServer" {
 }
 //////// SQLServer ////////
 
+//////// #3 AppServices ////////
+module "Appservice" {
+  source              = "./Modules/AppServices"
+  depends_on          = [module.SQLServer]
+  asp_name            = var.asp_name
+  wa_name             = var.wa_name
+  location            = azurerm_resource_group.rghackamedy.location
+  resource_group_name = azurerm_resource_group.rghackamedy.name
+  sku = {
+    tier = "Standard"
+    size = "S3"
+  }
+  site_config = {
+    dotnet_framework_version = "v4.0"
+    scm_type                 = "None"
+  }
+  app_settings = {}
+  connection_string = [{
+    name  = "DefaultConnectionString"
+    type  = "SQLAzure"
+    value = module.SQLServer.connection_string
+  }]
+  app_insights_name         = "${var.asp_name}app_insights"
+  application_insights_type = "web"
+  //workspace_id = module.LogAnalitycs.workspace_id
+}
+//////// AppServices ////////
 
 /*
 //// #5 FrontDoor
