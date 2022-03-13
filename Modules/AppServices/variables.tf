@@ -1,33 +1,33 @@
-variable location {}
-variable resource_group_name {}
-variable app_insights_name {}
-variable application_insights_type {}
+variable "location" {}
+variable "resource_group_name" {}
 
 //App Service Plan
-variable asp_name {}
+variable "asp_name" {}
 //SKU
-variable sku {
+variable "sku" {
   type = map(string)
 }
 
 //App Service 
-variable wa_name {}
+variable "wa_name" {}
 
-variable site_config {
+variable "site_config" {
   type = any
 }
 
-variable app_settings {
+variable "app_settings" {
   type = map(string)
 }
 
-variable connection_string {
+variable "connection_string" {
   type = list(map(string))
 }
 
-locals {
-  default_app_settings = {
-    APPLICATION_INSIGHTS_IKEY   = "${azurerm_application_insights.mshack.instrumentation_key}"
-    APPINSIGHTS_INSTRUMENTATIONKEY = "${azurerm_application_insights.mshack.instrumentation_key}"
-  }
+variable "instrumentation_key" {
+  type = string
+}
+
+variable "name" {
+  type        = string
+  description = "Variable/Parametro para poder referenciar al app svc."
 }

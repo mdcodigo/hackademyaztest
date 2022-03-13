@@ -22,3 +22,11 @@ resource "azurerm_log_analytics_solution" "hackademy" {
 
   tags = var.tags
 }
+
+resource "azurerm_application_insights" "hackademy" {
+  name                = var.app_insights_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  application_type    = var.application_insights_type
+  //workspace_id        = var.workspace_id
+}
