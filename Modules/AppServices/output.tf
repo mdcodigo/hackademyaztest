@@ -39,7 +39,7 @@ output "principal_id" {
 }
 
 output "user_assigned_identity_id" {
-  value = azurerm_user_assigned_identity.ekoapp.id
+  value = azurerm_user_assigned_identity.ekoapp.principal_id
 }
 
 ///ouput Application Insight
