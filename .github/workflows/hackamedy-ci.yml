@@ -31,21 +31,21 @@ jobs:
       - name: Terraform Init
         id: init
         env:
-          ARM_CLIENT_ID: "f0ac3453-93b5-494b-a32e-7c12593681ca"
-          ARM_CLIENT_SECRET: "7tQCDoSyZ-6ee2yFhBHKL7l~3NfrlaCJ-e"
-          ARM_SUBSCRIPTION_ID: "18f4adfb-c29c-4cf1-8507-0a0bfef5cceb"
-          ARM_TENANT_ID: "f9aee559-f927-489a-8bc4-7812e1d31a4d"
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID  }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET  }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID  }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID  }}
         run: terraform init
 
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
 
-      - name: Terraform Plan
-        id: plan
-        env:
-          ARM_CLIENT_ID: "f0ac3453-93b5-494b-a32e-7c12593681ca"
-          ARM_CLIENT_SECRET: "7tQCDoSyZ-6ee2yFhBHKL7l~3NfrlaCJ-e"
-          ARM_SUBSCRIPTION_ID: "18f4adfb-c29c-4cf1-8507-0a0bfef5cceb"
-          ARM_TENANT_ID: "f9aee559-f927-489a-8bc4-7812e1d31a4d"
-        run: terraform plan
+      # - name: Terraform Plan
+      #   id: plan
+      #   env:
+      #    ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID  }}
+      #    ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET  }}
+      #    ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID  }}
+      #    ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID  }}
+      #   run: terraform plan
