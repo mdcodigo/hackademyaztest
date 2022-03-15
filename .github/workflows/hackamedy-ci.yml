@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  tf-validate:
+  tf-validation:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,6 +30,11 @@ jobs:
 
       - name: Terraform Init
         id: init
+        env:
+          ARM_CLIENT_ID: "f0ac3453-93b5-494b-a32e-7c12593681ca"
+          ARM_CLIENT_SECRET: "7tQCDoSyZ-6ee2yFhBHKL7l~3NfrlaCJ-e"
+          ARM_SUBSCRIPTION_ID: "18f4adfb-c29c-4cf1-8507-0a0bfef5cceb"
+          ARM_TENANT_ID: "f9aee559-f927-489a-8bc4-7812e1d31a4d"
         run: terraform init
 
       - name: Terraform Validate
