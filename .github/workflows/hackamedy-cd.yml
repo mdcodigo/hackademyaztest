@@ -56,7 +56,7 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID  }}
         run: terraform apply tfplan
 
-      - name: Terraform Apply
+      - name: Terraform DESTROY
         id: destroy
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID  }}
