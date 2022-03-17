@@ -6,18 +6,28 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  app deploy:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v1
-      
-      - uses: azure/login@v1
+      - name: Repo Checkout
+        uses: actions/checkout@v1
+
+      - name: Az Login
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - uses: azure/sql-action@v1
+
+      - name: Az SQL Dacpac Deploy
+        uses: azure/sql-action@v1
         with:
           server-name: "hackademysql0x008.database.windows.net"
           connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
           #project-file: "./App/PartsUnlimited.Database/PartsUnlimited.Database.sqlproj"
           dacpac-package: "./App/Deploy/Db/PartsUnlimited.Database.dacpac"
+
+      - name: "Webapp Deploy"
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "hackademyapp0x008"
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
+          package: "./App/Deploy/WebAppPackage/"
