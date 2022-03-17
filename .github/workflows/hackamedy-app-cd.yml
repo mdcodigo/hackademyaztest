@@ -44,4 +44,8 @@ jobs:
         with:
           app-name: "hackademyapp0x008" # Replace with your app name
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
+<<<<<<< HEAD
           package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/src/PartsUnlimitedWebsite/"
+=======
+          package: "./App/Deploy/Web/"
+>>>>>>> ccc9184453d49e20a59dc8d2510a505943304682
