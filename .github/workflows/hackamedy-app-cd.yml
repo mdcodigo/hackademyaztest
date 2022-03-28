@@ -12,36 +12,36 @@ jobs:
       - name: Repo Checkout
         uses: actions/checkout@v1
 
-      # - name: Az Login
-      #   uses: azure/login@v1
-      #   with:
-      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      # - name: Az SQL Dacpac Deploy
-      #   uses: azure/sql-action@v1
-      #   with:
-      #     server-name: "hackademysql0x008.database.windows.net"
-      #     connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-      #     #project-file: "./App/PartsUnlimited.Database/PartsUnlimited.Database.sqlproj"
-      #     dacpac-package: "./App/Deploy/Db/PartsUnlimited.Database.dacpac"
-
-      - name: Install Nuget
-        uses: nuget/setup-nuget@v1
+      - name: Az Login
+        uses: azure/login@v1
         with:
-          nuget-version: 4.4.1 #latest
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: NuGet to restore dependencies as well as project-specific tools that are specified in the project file
-        run: nuget restore .\App\PartsUnlimited.sln
-
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.0.2
-
-      - name: Run MSBuild
-        run: msbuild .\App\PartsUnlimited.sln
-
-      - name: "Run Azure webapp deploy action using publish profile credentials"
-        uses: azure/webapps-deploy@v2
+      - name: Az SQL Dacpac Deploy
+        uses: azure/sql-action@v1
         with:
-          app-name: "hackademyapp0x008" # Replace with your app name
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
-          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/src/PartsUnlimitedWebsite/"
+          server-name: "hackademysql0x008.database.windows.net"
+          connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+          #project-file: "./App/PartsUnlimited.Database/PartsUnlimited.Database.sqlproj"
+          dacpac-package: "./App/Deploy/Db/PartsUnlimited.Database.dacpac"
+
+      # - name: Install Nuget
+      #   uses: nuget/setup-nuget@v1
+      #   with:
+      #     nuget-version: 4.4.1 #latest
+
+      # - name: NuGet to restore dependencies as well as project-specific tools that are specified in the project file
+      #   run: nuget restore .\App\PartsUnlimited.sln
+
+      # - name: Add msbuild to PATH
+      #   uses: microsoft/setup-msbuild@v1.0.2
+
+      # - name: Run MSBuild
+      #   run: msbuild .\App\PartsUnlimited.sln
+
+      # - name: "Run Azure webapp deploy action using publish profile credentials"
+      #   uses: azure/webapps-deploy@v2
+      #   with:
+      #     app-name: "hackademyapp0x008" # Replace with your app name
+      #     publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
+      #     package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/src/PartsUnlimitedWebsite/"
