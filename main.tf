@@ -77,8 +77,8 @@ module "SQLServer" {
     },
     {
       name             = "desktop-ip"
-      start_ip_address = "190.105.33.1"
-      end_ip_address   = "190.105.33.254"
+      start_ip_address = "190.105.53.1"
+      end_ip_address   = "190.105.53.254"
     }
   ]
   tags = local.common_tags
@@ -86,6 +86,7 @@ module "SQLServer" {
 //////// SQLServer ////////
 
 //////// #3 AppServices ////////
+/*
 module "Appservice" {
   source              = "./Modules/AppServices"
   depends_on          = [module.SQLServer]
@@ -114,10 +115,11 @@ module "Appservice" {
   //application_insights_type = "web"
   //workspace_id = module.LogAnalitycs.workspace_id
 }
+*/
 //////// AppServices ////////
 
 //////// #4 KeyVault ////////
-
+/*
 module "KeyVault" {
   source              = "./Modules/KeyVault"
   name                = local.kv_name
@@ -159,6 +161,7 @@ resource "azurerm_key_vault_access_policy" "kv_acc_pol_app2" {
     "recover"
   ]
 }
+*/
 //////// KeyVault ////////
 
 //// #5 FrontDoor
