@@ -94,15 +94,19 @@ module "Appservice" {
   name                = var.wa_name
   location            = azurerm_resource_group.rghackamedy.location
   resource_group_name = azurerm_resource_group.rghackamedy.name
+
   sku = {
     tier = "Standard"
     size = "S3"
   }
-  site_config = {
-    dotnet_framework_version = "v4.0"
-    scm_type                 = "None"
-  }
+
+  site_config = {}
+  #   dotnet_framework_version = "v4.0"
+  #   scm_type                 = "None"
+  # }
+
   app_settings = {}
+
   connection_string = [{
     name = "DefaultConnectionString"
     type = "SQLAzure"
