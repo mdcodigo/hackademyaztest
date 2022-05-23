@@ -26,6 +26,9 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Test SymLinks
+        run: if [[ -L ./Modules/AppServices/main.tf ]]; then echo "Is a symlink"; else echo "Is a regular file"; fi
 
       - name: Terraform Format
         id: fmt
