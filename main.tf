@@ -162,6 +162,7 @@ resource "azurerm_key_vault_access_policy" "kv_acc_pol_app2" {
 //////// KeyVault ////////
 
 //// #5 FrontDoor
+/*
 module "Frontdoor" {
   source              = "./modules/FrontDoor"
   tags                = local.common_tags
@@ -245,5 +246,6 @@ module "Frontdoor" {
     }
   }
 }
+*/
 //////////// FrontDoor ////////////
 
