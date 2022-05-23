@@ -26,7 +26,7 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
-        
+
       - name: Test SymLinks
         run: if [[ -L ./Modules/AppServices/main.tf ]]; then echo "Is a symlink"; else echo "Is a regular file"; fi
 
@@ -55,3 +55,11 @@ jobs:
       #    ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID  }}
       #    ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID  }}
       #   run: terraform plan
+
+      - name: Invoke 'Hackademy-Az-TF--CD' workflow for CD
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Hackademy-Az-TF--CD
+          #Este token hay que crearlo no es un secreto del workflow, leer: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+          token: ${{ secrets.ACTIONS_PAT }}
+          #inputs: '{ "reason": "Fired by Hackademy-Az-TF--CI Worflow.", "imagetag":"${{github.run_number}}" }'
