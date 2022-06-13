@@ -17,4 +17,4 @@ loganalytics_name = "hackademyloglytics"
 asp_name = "hackademyasp0x008"
 wa_name  = "hackademyapp0x008"
 
-#dummy change!
+#dummy change!!
