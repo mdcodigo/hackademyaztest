@@ -9,14 +9,14 @@ resource "azurerm_storage_account" "sa" {
   enable_https_traffic_only = true
   min_tls_version           = "TLS1_2"
 }
-*/
 
 resource "random_string" "str" {
   length  = 3
   special = false
   upper   = false
-  number  = false
+  numeric  = false
 }
+*/
 
 resource "random_password" "main" {
   length      = 24
