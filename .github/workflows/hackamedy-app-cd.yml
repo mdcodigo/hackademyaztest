@@ -19,40 +19,43 @@ jobs:
   app-build:
     runs-on: windows-latest
 
-      steps:
-        - name: Chekcout
-          uses: actions/checkout@v3
+    steps:
+      - name: Chekcout
+        uses: actions/checkout@v3
 
-        - name: Set up .NET Core
-          uses: actions/setup-dotnet@v2
-          with:
-            dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
       
-        - name: Set up dependency caching for faster builds
-          uses: actions/cache@v3
-          with:
-            path: ~/.nuget/packages
-            key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-nuget-
+      - name: Set up dependency caching for faster builds
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+          ${{ runner.os }}-nuget-
 
-        - name: Build with dotnet
-          run: dotnet build --configuration Release
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
 
-        - name: dotnet publish
-          run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
-        - name: Upload artifact for deployment job
-          uses: actions/upload-artifact@v3
-          with:
-            name: .net-app
-            path: ${{env.DOTNET_ROOT}}/myapp
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   app-deploy:
     permissions:
       contents: none
+    
     runs-on: ubuntu-latest
+    
     needs: app-build
+    
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
