@@ -1,0 +1,33 @@
+name: Hackademy-Az-TF--Destroy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  tf-destroy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Terraform Init
+        id: init
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID  }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET  }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID  }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID  }}
+        run: terraform init
+
+      - name: Terraform DESTROY
+        id: destroy
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID  }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET  }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID  }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID  }}
+        run: terraform destroy --auto-approve
