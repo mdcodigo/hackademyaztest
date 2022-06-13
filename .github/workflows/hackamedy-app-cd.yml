@@ -6,7 +6,6 @@ env:
   DOTNET_VERSION: '6.0'                 # set this to the .NET Core version to use
 
 on:
-on:
   push:
     branches: [main]
     paths:
