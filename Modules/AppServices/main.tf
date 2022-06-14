@@ -35,7 +35,7 @@ resource "azurerm_app_service" "ekoapp" {
   }
 
     site_config {
-    windows_fx_version = "DOTNET|6.0"
+    dotnet_framework_version = "v6.0"
   }
 
   # dynamic "site_config" {
