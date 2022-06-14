@@ -1,7 +1,7 @@
 name: Hackademy-Az-App--CD
 
 env:
-  AZURE_WEBAPP_NAME: partsunlimitedapi007    # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: hackademyapp0x008    # set this to the name of your Azure Web App
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '6.0'                 # set this to the .NET Core version to use
 
