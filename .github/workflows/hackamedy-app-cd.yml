@@ -23,7 +23,7 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v2
         with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
       
       - name: Set up dependency caching for faster builds
         uses: actions/cache@v3
