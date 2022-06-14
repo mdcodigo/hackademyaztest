@@ -2,7 +2,7 @@ prefix  = "ekoprty"
 project = "hackademy"
 
 //SQL
-sqlserver_name = "hackademysql0x008"
+sqlserver_name = "hackademysql0x009"
 admin_username = "hackademy"
 admin_password = "Str0ngPa$$w0rd"
 db_name        = "hackademyappdb"
