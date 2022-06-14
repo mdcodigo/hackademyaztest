@@ -37,18 +37,9 @@ resource "azurerm_app_service" "ekoapp" {
     site_config {
     dotnet_framework_version = "v6.0"
   }
-
-  # dynamic "site_config" {
-  #   for_each = [var.site_config]
-  #   content {
-  #     always_on                = lookup(site_config.value, "always_on", null)
-  #     dotnet_framework_version = lookup(site_config.value, "dotnet_framework_version", null)
+  #always_on                = lookup(site_config.value, "always_on", null)
   #scm_type                 = lookup(site_config.value, "None", null)
-  #   }
-  # }
-
-  #app_settings = merge(local.default_app_settings, var.app_settings)
-
+  
   dynamic "connection_string" {
     for_each = var.connection_string
     content {
