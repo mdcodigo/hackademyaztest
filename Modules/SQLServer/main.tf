@@ -75,7 +75,7 @@ resource "azurerm_sql_firewall_rule" "fw01" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "extaudit" {
-  name                       = lower("extaudit-${var.db_name}-diag")
+  name                       = lower("extaudit-${var.sqlserver_name}-${var.db_name}-diag")
   target_resource_id         = azurerm_sql_database.db.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
   //storage_account_id         = azurerm_storage_account.sa.id

@@ -17,4 +17,7 @@ loganalytics_name = "hackademyloglytics"
 asp_name = "hackademyasp0x008"
 wa_name  = "hackademyapp0x008"
 
+//KeyVault
+kv_name =  "kvhackademy0x009"
+
 #dummy change!!

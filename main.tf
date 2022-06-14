@@ -30,7 +30,7 @@ locals {
     Terraform   = "true"
     Environment = "hackademy"
   }
-  kv_name = "kvhackademy0x008"
+  //kv_name = "kvhackademy0x008"
 }
 
 //// #1 LogAnalitics
@@ -111,7 +111,7 @@ module "Appservice" {
     name = "DefaultConnectionString"
     type = "SQLAzure"
     //value = format("@Microsoft.KeyVault(VaultName=%s;SecretName=cnnstr)", local.kv_name)
-    value = format("@Microsoft.KeyVault(SecretUri=https://%s.vault.azure.net/secrets/cnnstr/)", local.kv_name)
+    value = format("@Microsoft.KeyVault(SecretUri=https://%s.vault.azure.net/secrets/cnnstr/)", var.kv_name)
   }]
   instrumentation_key = module.LogAnalitycs.app_insights_id
   //app_insights_name         = "${var.asp_name}app_insights"
@@ -124,7 +124,7 @@ module "Appservice" {
 
 module "KeyVault" {
   source              = "./Modules/KeyVault"
-  name                = local.kv_name
+  name                = var.kv_name
   depends_on          = [module.SQLServer, module.Appservice]        //Dependencia Explicita
   location            = azurerm_resource_group.rghackamedy.location  // Dependencia implicita
   resource_group_name = azurerm_resource_group.rghackamedy.name      // Dependencia implicita
@@ -149,6 +149,7 @@ resource "azurerm_key_vault_access_policy" "kv_acc_pol_app" {
   ]
 }
 
+/*
 resource "azurerm_key_vault_access_policy" "kv_acc_pol_app2" {
   depends_on   = [module.KeyVault]
   key_vault_id = module.KeyVault.id
@@ -163,6 +164,7 @@ resource "azurerm_key_vault_access_policy" "kv_acc_pol_app2" {
     "recover"
   ]
 }
+*/
 //////// KeyVault ////////
 
 //// #5 FrontDoor

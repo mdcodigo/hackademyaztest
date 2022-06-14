@@ -37,6 +37,11 @@ variable "admin_password" {
 
 }
 
+//// KeyVault
+variable "kv_name" {
+  type = string
+}
+
 //// FrontDoor
 variable "frontdoor_name" {
   type = string
