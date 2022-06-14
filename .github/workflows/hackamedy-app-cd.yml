@@ -85,7 +85,7 @@ jobs:
       - name: Az SQL Dacpac Deploy
         uses: azure/sql-action@v1
         with:
-          server-name: "hackademysql0x008.database.windows.net"
+          server-name: "hackademysql0x009.database.windows.net"
           connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
           #project-file: "./App/PartsUnlimited.Database/PartsUnlimited.Database.sqlproj"
           dacpac-package: "./App/Deploy/Db/PartsUnlimited.Database.dacpac"
