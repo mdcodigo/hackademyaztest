@@ -10,7 +10,7 @@ on:
 jobs:
   tf-plan-apply:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash

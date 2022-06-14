@@ -34,7 +34,6 @@ variable "db_name" {
 }
 variable "admin_password" {
   type = string
-
 }
 
 //// KeyVault
