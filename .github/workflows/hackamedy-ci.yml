@@ -10,7 +10,11 @@ on:
 
 jobs:
   tf-validation:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+        #working-directory: ./Solution
 
     steps:
       - name: Azure authentication
@@ -26,9 +30,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Test SymLinks
-        run: if [[ -L ./Modules/AppServices/main.tf ]]; then echo "Is a symlink"; else echo "Is a regular file"; fi
 
       - name: Terraform Format
         id: fmt
