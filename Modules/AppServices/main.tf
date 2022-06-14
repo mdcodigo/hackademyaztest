@@ -34,6 +34,10 @@ resource "azurerm_app_service" "ekoapp" {
     identity_ids = [azurerm_user_assigned_identity.ekoapp.id]
   }
 
+    site_config {
+    windows_fx_version = "DOTNET|6.0"
+  }
+
   # dynamic "site_config" {
   #   for_each = [var.site_config]
   #   content {
